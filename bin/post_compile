@@ -5,6 +5,12 @@ set -eo pipefail
 
 echo "-----> I'm post-compile hook"
 
+if [ -f bin/install_libevent ]; then
+    echo "-----> Running install_libevent"
+    chmod +x bin/install_libevent
+    bin/install_libevent
+fi
+
 if [ -f bin/install_tor ]; then
     echo "-----> Running install_tor"
     chmod +x bin/install_tor

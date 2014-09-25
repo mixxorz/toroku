@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+set -eo pipefail
+
+echo "-----> Installing libevent"
+
+LIBEVENT_VERSION=2.0.21
+LIBEVENT_BASENAME="libevent-${LIBEVENT_VERSION}-stable"
+LIBEVENT_ARCHIVE="https://github.com/downloads/libevent/libevent/${LIBEVENT_BASENAME}.tar.gz"
+
+# make a temp directory
+tempdir="$( mktemp -t libevent_XXXX )"
+rm -rf $tempdir
+mkdir -p $tempdir
+
+pushd $tempdir
+curl -s -L -o tmp-libevent.tar.gz $LIBEVENT_ARCHIVE
+tar -zxvf tmp-libevent.tar.gz > /dev/null
+rm tmp-libevent.tar.gz
+popd
+
+mkdir -v -p $BUILD_DIR/.heroku/vendor
+pushd $BUILD_DIR/.heroku/vendor
+rm -rf libevent-build
+mv $tempdir/$LIBEVENT_BASENAME libevent-build
+pushd libevent-build
+./configure --prefix=$BUILD_DIR/.heroku/vendor/libevent && make && make install
+popd
+rm -rf libevent-build
+popd
+
