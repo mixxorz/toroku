@@ -6,7 +6,7 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'toroku.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
-    url(r'^$', TemplateView.as_view(template_name='home.html'), name='home'),
+    url(r'^$', 'toroku.views.home', name='home'),
 
     url(r'^admin/', include(admin.site.urls)),
 )
