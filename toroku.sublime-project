@@ -1,0 +1,28 @@
+{
+	"folders":
+	[
+		{
+			"file_exclude_patterns":
+			[
+				"*.gitignore",
+				"*.gitattributes",
+				"*.sublime-project",
+				"*.sublime-workspace",
+				"*.db",
+				"*.sqlite3"
+			],
+			"folder_exclude_patterns":
+			[
+				"*.sass-cache",
+				"venv",
+				"$PROJECT_NAME/static/app/bower_components",
+				"$PROJECT_NAME/static/node_modules",
+				"staticfiles"
+			],
+			"path": "."
+		}
+	],
+	"settings": {
+        "python_interpreter": "~/.virtualenvs/lisbona/Scripts/python.exe"
+    }
+}
