@@ -13,7 +13,6 @@ def home(request):
                 settings.BASE_DIR,
                 os.path.pardir,
                 'tor',
-                'hidden_service',
                 'hostname'
             )
         )

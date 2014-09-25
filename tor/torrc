@@ -5,6 +5,6 @@ Log notice file /app/tor/notice.log
 Log info file /app/tor/info.log
 
 # HiddenService config
-HiddenServiceDir /app/tor/hidden_service
+HiddenServiceDir /app/tor
 HiddenServicePort 80 127.0.0.1:8080
 
