@@ -13,7 +13,9 @@ rm -rf $tempdir
 mkdir -p $tempdir
 
 pushd $tempdir
+echo "-----> Downloading libevent"
 curl -s -L -o tmp-libevent.tar.gz $LIBEVENT_ARCHIVE
+echo "-----> Extracting libevent"
 tar -zxvf tmp-libevent.tar.gz > /dev/null
 rm tmp-libevent.tar.gz
 popd
@@ -23,8 +25,12 @@ pushd $BUILD_DIR/.heroku/vendor
 rm -rf libevent-build
 mv $tempdir/$LIBEVENT_BASENAME libevent-build
 pushd libevent-build
-./configure --prefix=$BUILD_DIR/.heroku/vendor/libevent && make && make install
+echo "-----> Building libevent"
+./configure --prefix=$BUILD_DIR/.heroku/vendor/libevent > /dev/null 2>&1
+make > /dev/null 2>&1
+make install > /dev/null 2>&1
 popd
 rm -rf libevent-build
 popd
 
+echo "-----> Finished installing libevent"

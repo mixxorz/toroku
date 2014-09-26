@@ -13,7 +13,9 @@ rm -rf $tempdir
 mkdir -p $tempdir
 
 pushd $tempdir
+echo "-----> Downloading Tor"
 curl -s -L -o tmp-tor.tar.gz $TOR_ARCHIVE
+echo "-----> Extracting Tor"
 tar -zxvf tmp-tor.tar.gz > /dev/null
 rm tmp-tor.tar.gz
 popd
@@ -23,7 +25,10 @@ pushd $BUILD_DIR/.heroku/vendor
 rm -rf tor-build
 mv $tempdir/$TOR_BASENAME tor-build
 pushd tor-build
-./configure --prefix=$BUILD_DIR/.heroku/vendor/tor --with-libevent-dir=$BUILD_DIR/.heroku/vendor/libevent && make && make install
+echo "-----> Building Tor"
+./configure --prefix=$BUILD_DIR/.heroku/vendor/tor --with-libevent-dir=$BUILD_DIR/.heroku/vendor/libevent > /dev/null 2>&1
+make > /dev/null 2>&1
+make install > /dev/null 2>&1
 popd
 rm -rf tor-build
 popd
@@ -32,3 +37,5 @@ ln -s -f ../../vendor/tor/bin/tor .heroku/python/bin/tor
 ln -s -f ../../vendor/tor/bin/tor-gencert .heroku/python/bin/tor-gencert
 ln -s -f ../../vendor/tor/bin/torify .heroku/python/bin/torify
 ln -s -f ../../vendor/tor/bin/tor-resolve .heroku/python/bin/tor-resolve
+
+echo "-----> Finished installing tor"
